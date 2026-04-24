@@ -1466,18 +1466,18 @@ const DEMO_STEPS = [
     body:'Medical emergency at Stage 2 entrance. Your dashboard shows the alert in under 2 seconds with exact GPS.',
     contrast:'"Anyone near Gate A? Over\u2026 come back? \u2026Radio silence."',
     contrastLabel:'Radio-only alternative',
-    spotlight:{l:'14.5%',t:'51%',w:'33%',h:'18%'}, cardPos:'right', action:'sos-fire' },
+    spotlight:{l:'25%',t:'51%',w:'22%',h:'18%'}, cardPos:'right', action:'sos-fire' },
   { label:'STEP 3 OF 5', title:'Dispatcher has exact coordinates',
     body:'The venue map shows the precise location. Your dispatcher directs the team straight to the incident. No guessing, in seconds.',
     contrast:null, spotlight:{l:'45%',t:'6%',w:'55%',h:'75%'}, cardPos:'left', action:'show-gps' },
   { label:'STEP 4 OF 5', title:'Responder assigned in one click',
     body:'One click assigns the nearest on-duty responder with GPS coordinates. Your whole team sees the updated status.',
-    contrast:null, spotlight:{l:'14.5%',t:'26%',w:'31%',h:'12%'}, cardPos:'right', action:'assign' },
+    contrast:null, spotlight:{l:'25%',t:'26%',w:'20%',h:'12%'}, cardPos:'right', action:'assign' },
   { label:'STEP 5 OF 5', title:'Resolved in 3m 12s. Every second logged.',
     body:'Full audit trail: who reported, when, GPS, who responded, time on scene, resolution. Exportable PDF ready for your insurer.',
     contrast:'Your insurer asks for documentation. You export it in one click.',
     contrastLabel:'For your insurance & legal team',
-    spotlight:{l:'14.5%',t:'18%',w:'31%',h:'22%'}, cardPos:'right', action:'resolve' }
+    spotlight:{l:'25%',t:'18%',w:'20%',h:'22%'}, cardPos:'right', action:'resolve' }
 ];
 
 let demoStep_cur = 0;
@@ -1495,6 +1495,7 @@ function startDemo() {
   overlay.style.display = 'block';
   overlay.style.pointerEvents = 'all';
   if (window.innerWidth <= 640) overlay.classList.add('mob-demo');
+  document.getElementById('demo-zone').scrollIntoView({behavior:'smooth', block:'center'});
   demoStep_cur = 0;
   buildDemoDots();
   renderDemoStep(0);
