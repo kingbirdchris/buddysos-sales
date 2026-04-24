@@ -1532,7 +1532,10 @@ function stopDemo() {
   clearTimeout(demoTimer); clearInterval(demoProgressInterval);
   const _ov = document.getElementById('demo-overlay');
   const _dc = document.getElementById('demo-card');
-  document.getElementById('mob-demo-backdrop')?.remove();
+  document.getElementById('demo-zone').style.removeProperty('display');
+  document.getElementById('demo-zone').style.removeProperty('display');
+  const _sw = document.querySelector('.dash-svg-wrap');
+  if (_sw) _sw.style.removeProperty('display');
   if (!_ov.contains(_dc)) {
     ['position','bottom','top','left','right','width','max-width','transform'].forEach(p=>_dc.style.removeProperty(p));
     _dc.style.zIndex = '10';
@@ -1634,9 +1637,6 @@ function positionDemoElements(step) {
   const backdrop = document.getElementById('demo-backdrop');
   const spotlight = document.getElementById('demo-spotlight');
   const card = document.getElementById('demo-card');
-  /* Mobile: spotlight hidden via CSS, card fixed via CSS — just neutralise backdrop */
-  if (window.innerWidth <= 640) { spotlight.style.display = 'none'; backdrop.style.background = 'transparent'; return; }
-  /* backdrop must stay transparent — spotlight box-shadow handles all the darkness */
   backdrop.style.background = 'rgba(11,14,19,0)';
   if (step.spotlight) {
     const sp = step.spotlight;
@@ -1645,6 +1645,8 @@ function positionDemoElements(step) {
     spotlight.style.boxShadow='0 0 0 9999px rgba(0,0,0,0.94), 0 0 0 2px rgba(139,92,246,1), 0 0 0 6px rgba(139,92,246,0.4), 0 0 36px 8px rgba(139,92,246,0.55)';
     spotlight.style.display='block';
   } else { spotlight.style.display='none'; }
+  /* On mobile: card position set via setProperty in startDemo — skip desktop positioning */
+  if (window.innerWidth <= 640) { card.style.transition='none'; return; }
   card.style.transition='all 0.4s ease';
   /* Vertically align card with spotlight centre — prevents large eye-travel gaps */
   var _cardTop = '8%';
