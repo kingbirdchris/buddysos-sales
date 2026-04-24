@@ -121,7 +121,7 @@ body {
 .export-btn {
   font-size: 9.5px; font-weight: 600; color: var(--muted2);
   background: rgba(255,255,255,0.05); border: 1px solid var(--border);
-  border-radius: 4px; padding: 3px 9px;
+  border-radius: 4px; padding: 3px 9px; pointer-events: none; cursor: default;
 }
 .analytics-body { display: flex; gap: 16px; align-items: flex-end; }
 .analytics-kpis { display: flex; gap: 8px; flex-shrink: 0; }
@@ -606,13 +606,13 @@ body.viewer-mode #tab-overview { display: block !important; }
           <span class="logo-sub">buddysos.app</span>
         </div>
       </div>
-      <div class="event-tag"><span id="event-tag-text">For Festival &amp; Event Operators</span></div>
+      <div class="event-tag"><span id="event-tag-text">For Event Operators</span></div>
     </div>
 
     <!-- HERO -->
     <div class="hero">
       <h1>Every attendee has a panic button.<br><span class="g" id="hero-line2">Your dispatcher gets the coordinates.</span></h1>
-      <p>BuddySOS is a free app for every attendee and a real-time command dashboard for your staff. An attendee taps SOS — your dispatcher gets exact GPS coordinates in seconds.</p>
+      <p>BuddySOS is a free app for every attendee and a real-time command dashboard for your staff. An attendee taps SOS. Your dispatcher gets exact GPS coordinates in seconds.</p>
     </div>
 
     <!-- PILLS -->
@@ -628,7 +628,7 @@ body.viewer-mode #tab-overview { display: block !important; }
         <div class="dh-head-left">
           <div class="dh-icon">&#128421;&#65039;</div>
           <div>
-            <h2>For Your Staff — The Command Dashboard</h2>
+            <h2>For Your Staff: The Command Dashboard</h2>
             <p>Web-based · works on any device · no install needed</p>
           </div>
         </div>
@@ -855,7 +855,7 @@ body.viewer-mode #tab-overview { display: block !important; }
               <div style="background:rgba(9,12,18,0.97);border:1px solid rgba(255,255,255,0.12);border-radius:14px;padding:16px 18px;box-shadow:0 20px 60px rgba(0,0,0,0.6);">
                 <div id="demo-step-label" style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#8B5CF6;margin-bottom:6px;">STEP 1 OF 5</div>
                 <div id="demo-step-title" style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:800;color:#f8fafc;margin-bottom:8px;line-height:1.3;">Dashboard during a live event</div>
-                <div id="demo-step-body" style="font-size:11px;line-height:1.55;color:#cbd5e1;margin-bottom:10px;">Your team has full visibility — GPS, responder status, and heatmap in real time.</div>
+                <div id="demo-step-body" style="font-size:11px;line-height:1.55;color:#cbd5e1;margin-bottom:10px;">Your team sees GPS coordinates, responder status, and the live heatmap at once.</div>
                 <div id="demo-contrast" style="display:none;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:6px;padding:8px 10px;margin-bottom:10px;">
                   <div style="font-size:8.5px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:#fca5a5;margin-bottom:3px;" id="demo-contrast-label">Radio-only alternative</div>
                   <div id="demo-contrast-text" style="font-size:10.5px;color:#fca5a5;font-style:italic;line-height:1.45;">"Anyone near Gate A? Over&#8230;"</div>
@@ -891,8 +891,8 @@ body.viewer-mode #tab-overview { display: block !important; }
       <div style="flex:1;">
         <div class="as-label">For Attendees — The Free App <span>iOS &amp; Android · no cost to download</span></div>
         <div class="as-feats">
-          <div class="as-feat"><strong>One-Tap SOS</strong> — sends GPS location to the group and your staff dashboard instantly</div>
-          <div class="as-feat"><strong>Live Buddy Tracking</strong> — group members see each other on a real-time map</div>
+          <div class="as-feat"><strong>One-Tap SOS:</strong> sends GPS location to your group and staff dashboard</div>
+          <div class="as-feat"><strong>Live Buddy Tracking:</strong> group members see each other on a real-time map</div>
         </div>
         <div class="cs-note"><span class="cs-tag">Coming Soon</span>SOS Escalation &nbsp;·&nbsp; Safe Zone Setup &nbsp;·&nbsp; Geofence Alerts</div>
       </div>
@@ -924,20 +924,20 @@ body.viewer-mode #tab-overview { display: block !important; }
         <!-- Row 1 -->
         <div class="stakes-tr">
           <div class="stakes-scenario">Incident Response</div>
-          <div class="stakes-td stakes-bad">Radio call: no GPS, no log, no accountability. Family files lawsuit — no documentation exists.</div>
-          <div class="stakes-td stakes-good">GPS hits dashboard in 2 seconds. Responder assigned. Resolved in 4 minutes. Full audit trail saved.</div>
+          <div class="stakes-td stakes-bad">Radio call: no GPS, no log, no accountability. Family files lawsuit. No documentation exists.</div>
+          <div class="stakes-td stakes-good">GPS hits dashboard in 2 seconds. Your dispatcher assigns a responder. Your team closes it in 4 minutes. Every step logged.</div>
         </div>
         <!-- Row 2 -->
         <div class="stakes-tr">
           <div class="stakes-scenario">Medical Emergency</div>
-          <div class="stakes-td stakes-bad">Staff dispatched by estimation. Ambulance arrives 9 minutes late — no one had coordinates.</div>
-          <div class="stakes-td stakes-good">Exact location sent instantly. Dispatcher directs nearest responder. Closed in 3m 12s.</div>
+          <div class="stakes-td stakes-bad">Staff dispatched by estimation. Ambulance arrives 9 minutes late. No one had coordinates.</div>
+          <div class="stakes-td stakes-good">Your dispatcher gets the exact location. They direct the nearest responder. Closed in 3m 12s.</div>
         </div>
         <!-- Row 3 -->
         <div class="stakes-tr">
           <div class="stakes-scenario">Post-Event Liability</div>
           <div class="stakes-td stakes-bad">Handwritten notes and memory. Insurer asks for documentation. Claim disputed.</div>
-          <div class="stakes-td stakes-good">Every incident timestamped, GPS-tagged, logged. Export PDF in one click. Claim supported.</div>
+          <div class="stakes-td stakes-good">Every incident timestamped, GPS-tagged, logged. Your insurer gets an export PDF in one click.</div>
         </div>
       </div>
     </div>
@@ -961,7 +961,7 @@ body.viewer-mode #tab-overview { display: block !important; }
         <div class="fs">
           <div class="fn">03</div>
           <h4>Resolved and Logged</h4>
-          <p>Responder closes the incident. The full response timeline saves automatically for your records.</p>
+          <p>Responder closes the incident. The full response timeline saves to your records.</p>
         </div>
       </div>
     </div>
@@ -976,7 +976,7 @@ body.viewer-mode #tab-overview { display: block !important; }
           <div class="b-flow-arrow">&#8594;</div>
           <div class="b-flow-step"><div class="bfs-label">Team Responds</div><div class="bfs-sub">Your process</div></div>
         </div>
-        <div class="b-note">Layers on top of how you already operate. Nothing replaced.</div>
+        <div class="b-note">Layers on top of your ops. Nothing replaced.</div>
       </div>
       <div class="b-box purple">
         <h3>&#127912; White Label &amp; Custom Branding</h3>
@@ -1000,7 +1000,7 @@ body.viewer-mode #tab-overview { display: block !important; }
           <div style="font-size:10.5px;color:#cbd5e1;display:flex;align-items:center;gap:7px;"><span style="color:#6ee7b7;font-size:12px;">✓</span> Your logo, colors &amp; event name on the app and dashboard</div>
           <div style="font-size:10.5px;color:#cbd5e1;display:flex;align-items:center;gap:7px;"><span style="color:#6ee7b7;font-size:12px;">✓</span> Venue layout &amp; staff roles configured before your event</div>
           <div style="font-size:10.5px;color:#cbd5e1;display:flex;align-items:center;gap:7px;"><span style="color:#6ee7b7;font-size:12px;">✓</span> Dedicated onboarding call + direct access to the founder</div>
-          <div style="font-size:10.5px;color:#cbd5e1;display:flex;align-items:center;gap:7px;"><span style="color:#6ee7b7;font-size:12px;">✓</span> Live within 2 weeks of your decision</div>
+          <div style="font-size:10.5px;color:#cbd5e1;display:flex;align-items:center;gap:7px;"><span style="color:#6ee7b7;font-size:12px;">✓</span> Live within 2 weeks of signing</div>
         </div>
         <div style="margin-top:12px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:8px 12px;">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;">
@@ -1118,7 +1118,7 @@ body.viewer-mode #tab-overview { display: block !important; }
         <button class="suc-btn view" onclick="viewGeneratedProposal()">View Proposal</button>
         <button class="suc-btn pdf" onclick="printProposal()">Download PDF</button>
       </div>
-      <div class="save-confirm">Proposal saved to Drive.</div>
+      <div class="save-confirm">Proposal saved to your Google Drive.</div>
       </div>
     </div>
   </div>
@@ -1173,7 +1173,7 @@ function showTab(n) {
 
 // ── Event type maps ──────────────────────────────────────────────
 function getEventTypeLabel(val) {
-  return ({festival:'For Music Festivals',multivenue:'For Multi-Venue Events',venue:'For Venue Operators',university:'For University Events',security:'For Security Companies',insurance:'For Insurance & Risk Teams',corporate:'For Corporate Retreats'})[val]||'For Festival & Event Operators';
+  return ({festival:'For Music Festivals',multivenue:'For Multi-Venue Events',venue:'For Venue Operators',university:'For University Events',security:'For Security Companies',insurance:'For Insurance & Risk Teams',corporate:'For Corporate Retreats'})[val]||'For Event Operators';
 }
 function getEventTypeDisplay(val) {
   return ({festival:'Music Festival',multivenue:'Multi-Venue Event',venue:'Venue Operator',university:'University Event',security:'Security Company',insurance:'Insurance / Risk Team',corporate:'Corporate Retreat'})[val]||val;
@@ -1244,6 +1244,7 @@ function generateProposal() {
     fetch(_wUrl, {mode: 'no-cors'}).catch(()=>{}); // fire and forget
   }
   document.getElementById('success-panel').style.display = 'block';
+  setTimeout(()=>{ document.getElementById('success-panel').scrollIntoView({behavior:'smooth',block:'start'}); }, 80);
   
   proposalCompleted = true;
   currentProposalData = data;
@@ -1267,6 +1268,7 @@ function viewGeneratedProposal() {
   if (!currentProposalData) return;
   applyPersonalization(currentProposalData);
   showTab(1);
+  document.body.classList.add('viewer-mode');
 }
 function clearProposal() {
   currentProposalData = null;
@@ -1277,7 +1279,7 @@ function clearProposal() {
   const ct = document.getElementById('cta-headline');
   if (ct) ct.textContent = 'Become a Founding Event Partner';
   const ett = document.getElementById('event-tag-text');
-  if (ett) ett.textContent = 'For Festival & Event Operators';
+  if (ett) ett.textContent = 'For Event Operators';
   const fi = document.getElementById('footer-proposal-info');
   if (fi) fi.textContent = '';
   window.history.replaceState(null,'',window.location.pathname);
@@ -1444,7 +1446,7 @@ function loadProposalFromHash() {
   if (!hash) return;
   try {
     const data = JSON.parse(decodeURIComponent(escape(atob(hash))));
-    if (data.eventName) { applyPersonalization(data); showTab(1); }
+    if (data.eventName) { applyPersonalization(data); showTab(1); document.body.classList.add('viewer-mode'); }
   } catch(e) {}
 }
 
@@ -1454,24 +1456,24 @@ function loadProposalFromHash() {
 const DEMO_STEP_DURATION = 8000;
 const DEMO_STEPS = [
   { label:'STEP 1 OF 5', title:'Your dashboard during a live event',
-    body:'3 incidents open. Your team has full visibility — GPS coordinates, responder status, and real-time heatmap showing crowd concentration.',
-    contrast:null, spotlight:null, cardPos:'center-top', action:'reset' },
+    body:'3 incidents open. Your team sees GPS coordinates, responder status, and the live heatmap at once.',
+    contrast:null, spotlight:{l:'10%',t:'7%',w:'84%',h:'74%'}, cardPos:'right', action:'reset' },
   { label:'STEP 2 OF 5', title:'A new SOS fires',
-    body:'Medical emergency near Main Stage. Alert hits your dashboard in under 2 seconds with exact GPS. No ambiguity. No delay.',
+    body:'Medical emergency near Main Stage. Alert hits your dashboard in under 2 seconds with exact GPS.',
     contrast:'"Anyone near Gate A? Over\u2026 come back? \u2026Radio silence."',
     contrastLabel:'Radio-only alternative',
-    spotlight:{l:'14.5%',t:'14%',w:'33%',h:'72%'}, cardPos:'right', action:'sos-fire' },
+    spotlight:{l:'14.5%',t:'51%',w:'33%',h:'18%'}, cardPos:'right', action:'sos-fire' },
   { label:'STEP 3 OF 5', title:'Dispatcher has exact coordinates',
-    body:'The venue map shows the precise location. No guessing. Your dispatcher directs the team straight to the incident — in seconds.',
+    body:'The venue map shows the precise location. Your dispatcher directs the team straight to the incident. No guessing, in seconds.',
     contrast:null, spotlight:{l:'45%',t:'6%',w:'55%',h:'75%'}, cardPos:'left', action:'show-gps' },
   { label:'STEP 4 OF 5', title:'Responder assigned in one click',
-    body:'One click assigns the nearest on-duty responder with GPS coordinates. Status changes instantly. Your whole team sees it.',
-    contrast:null, spotlight:{l:'14.5%',t:'18%',w:'31%',h:'24%'}, cardPos:'right', action:'assign' },
+    body:'One click assigns the nearest on-duty responder with GPS coordinates. Your whole team sees the updated status.',
+    contrast:null, spotlight:{l:'14.5%',t:'26%',w:'31%',h:'12%'}, cardPos:'right', action:'assign' },
   { label:'STEP 5 OF 5', title:'Resolved in 3m 12s. Every second logged.',
     body:'Full audit trail: who reported, when, GPS, who responded, time on scene, resolution. Exportable PDF ready for your insurer.',
     contrast:'Your insurer asks for documentation. You export it in one click.',
     contrastLabel:'For your insurance & legal team',
-    spotlight:null, cardPos:'center-top', action:'resolve' }
+    spotlight:{l:'14.5%',t:'18%',w:'31%',h:'22%'}, cardPos:'right', action:'resolve' }
 ];
 
 let demoStep_cur = 0;
