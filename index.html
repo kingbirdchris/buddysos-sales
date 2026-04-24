@@ -439,9 +439,13 @@ body { padding-top: 52px; }
   .proposals-grid { grid-template-columns: 1fr; }
   .success-actions { flex-direction: column; }
   .dh-head { flex-direction: column; align-items: flex-start; gap: 6px; }
-  #demo-card { max-width: calc(100% - 20px) !important; left: 10px !important; right: 10px !important; transform: none !important; top: 5% !important; }
+  #demo-card { position: fixed !important; bottom: 80px !important; top: auto !important; left: 12px !important; right: 12px !important; width: auto !important; max-width: none !important; transform: none !important; }
+  #demo-spotlight { display: none !important; }
 }
 
+
+/* ── Mobile demo overlay ── */
+#demo-overlay.mob-demo { position: fixed !important; inset: 0 !important; background: rgba(0,0,0,0.78) !important; z-index: 500 !important; border-radius: 0 !important; }
 
 /* ── Viewer mode — hides internal tabs when viewing a shared proposal ── */
 body.viewer-mode #step-nav { display: none !important; }
@@ -1490,6 +1494,7 @@ function startDemo() {
   const overlay = document.getElementById('demo-overlay');
   overlay.style.display = 'block';
   overlay.style.pointerEvents = 'all';
+  if (window.innerWidth <= 640) overlay.classList.add('mob-demo');
   demoStep_cur = 0;
   buildDemoDots();
   renderDemoStep(0);
@@ -1498,7 +1503,9 @@ function startDemo() {
 function stopDemo() {
   demoActive = false; demoPaused = false;
   clearTimeout(demoTimer); clearInterval(demoProgressInterval);
-  document.getElementById('demo-overlay').style.display = 'none';
+  const _ov = document.getElementById('demo-overlay');
+  _ov.style.display = 'none';
+  _ov.classList.remove('mob-demo');
   document.getElementById('demo-trigger-bar').style.display = 'flex';
   resetDemoSVG();
 }
@@ -1593,6 +1600,8 @@ function positionDemoElements(step) {
   const backdrop = document.getElementById('demo-backdrop');
   const spotlight = document.getElementById('demo-spotlight');
   const card = document.getElementById('demo-card');
+  /* Mobile: spotlight hidden via CSS, card fixed via CSS — just neutralise backdrop */
+  if (window.innerWidth <= 640) { backdrop.style.background = 'transparent'; return; }
   /* backdrop must stay transparent — spotlight box-shadow handles all the darkness */
   backdrop.style.background = 'rgba(11,14,19,0)';
   if (step.spotlight) {
