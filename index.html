@@ -1033,6 +1033,10 @@ body.viewer-mode #tab-overview { display: block !important; }
         <input type="text" id="f-contact" placeholder="e.g. Sarah Jensen" autocomplete="off">
       </div>
       <div class="form-field">
+        <label>Contact Email <span style="font-weight:400;text-transform:none;letter-spacing:0;color:rgba(148,163,184,0.6);margin-left:4px;">optional</span></label>
+        <input type="email" id="f-email" placeholder="e.g. sarah@jacksonindie.com" autocomplete="off">
+      </div>
+      <div class="form-field">
         <label>Event / Organization Name</label>
         <input type="text" id="f-event" placeholder="e.g. Jackson Indie Music Week" autocomplete="off">
       </div>
@@ -1186,7 +1190,9 @@ function updatePreview() {
   const ct = document.getElementById('f-contact').value.trim();
   document.getElementById('preview-line2').textContent = ev ? 'Keep every '+ev+' attendee safe.' : 'Your dispatcher gets the coordinates.';
   const ctx = document.getElementById('f-context') ? document.getElementById('f-context').value.trim() : '';
-  document.getElementById('preview-meta').innerHTML = 'Prepared for <em>'+(ct||'your contact')+'</em> · For <em>'+(ev||'your event')+'</em>'+(ctx ? '<br><span style="font-style:italic;color:#94a3b8;">'+ctx+'</span>' : '');
+  const em = document.getElementById('f-email') ? document.getElementById('f-email').value.trim().toLowerCase() : '';
+  const intFlag = em.endsWith('@kingbirdsolutions.com') ? ' <span style="font-size:9px;background:rgba(249,115,22,0.15);color:#fdba74;border:1px solid rgba(249,115,22,0.3);border-radius:3px;padding:1px 5px;vertical-align:middle;">INTERNAL — no notification</span>' : '';
+  document.getElementById('preview-meta').innerHTML = 'Prepared for <em>'+(ct||'your contact')+'</em> · For <em>'+(ev||'your event')+'</em>'+intFlag+(ctx ? '<br><span style="font-style:italic;color:#94a3b8;">'+ctx+'</span>' : '');
 }
 document.addEventListener('DOMContentLoaded', () => {
   const ec = document.getElementById('f-event');
@@ -1206,15 +1212,19 @@ function generateProposal() {
   const event   = document.getElementById('f-event').value.trim();
   if (!contact) { alert('Please enter a contact name.'); return; }
   if (!event)   { alert('Please enter an event name.'); return; }
+  const emailVal = document.getElementById('f-email') ? document.getElementById('f-email').value.trim().toLowerCase() : '';
+  const isInternal = emailVal.endsWith('@kingbirdsolutions.com');
   const data = {
-    id:          genId(),
-    contactName: contact,
-    eventName:   event,
-    eventType:   document.getElementById('f-type').value,
-    attendance:  document.getElementById('f-attendance').value,
-    website:     document.getElementById('f-website').value.trim(),
-    contextLine: document.getElementById('f-context') ? document.getElementById('f-context').value.trim() : '',
-    date:        new Date().toISOString()
+    id:           genId(),
+    contactName:  contact,
+    contactEmail: emailVal,
+    eventName:    event,
+    eventType:    document.getElementById('f-type').value,
+    attendance:   document.getElementById('f-attendance').value,
+    website:      document.getElementById('f-website').value.trim(),
+    contextLine:  document.getElementById('f-context') ? document.getElementById('f-context').value.trim() : '',
+    date:         new Date().toISOString(),
+    internal:     isInternal
   };
   const lib = getProposals();
   lib.unshift({...data, archived:false});
@@ -1222,6 +1232,17 @@ function generateProposal() {
   const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(data))));
   const url = window.location.href.split('#')[0] + '#' + encoded;
   document.getElementById('proposal-url').value = url;
+
+  // ── Save to Drive + notify Slack (skips internal @kingbirdsolutions.com) ──
+  const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbzvPgJfSsCdP5bktvGKOIew9S80VGtp-oXrCIkveyjpFp2fGONfN4-QbHuQH316IKsYHQ/exec';
+  if (WEBHOOK_URL && WEBHOOK_URL !== 'https://script.google.com/macros/s/AKfycbzvPgJfSsCdP5bktvGKOIew9S80VGtp-oXrCIkveyjpFp2fGONfN4-QbHuQH316IKsYHQ/exec') {
+    fetch(WEBHOOK_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({...data, encoded})
+    }).catch(()=>{}); // fire and forget
+  }
   document.getElementById('success-panel').style.display = 'block';
   document.getElementById('ntfy-topic').textContent = 'bsos-'+data.id;
   proposalCompleted = true;
