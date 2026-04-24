@@ -1612,9 +1612,15 @@ function positionDemoElements(step) {
     spotlight.style.display='block';
   } else { spotlight.style.display='none'; }
   card.style.transition='all 0.4s ease';
-  if (step.cardPos==='right') { card.style.left='auto'; card.style.right='2%'; card.style.top='8%'; card.style.transform='none'; }
-  else if (step.cardPos==='left') { card.style.right='auto'; card.style.left='2%'; card.style.top='8%'; card.style.transform='none'; }
-  else { card.style.left='50%'; card.style.right='auto'; card.style.top='8%'; card.style.transform='translateX(-50%)'; }
+  /* Vertically align card with spotlight centre — prevents large eye-travel gaps */
+  var _cardTop = '8%';
+  if (step.spotlight) {
+    var _spCenter = parseFloat(step.spotlight.t) + parseFloat(step.spotlight.h) / 2;
+    _cardTop = Math.max(5, Math.min(55, _spCenter - 20)) + '%';
+  }
+  if (step.cardPos==='right') { card.style.left='auto'; card.style.right='2%'; card.style.top=_cardTop; card.style.transform='none'; }
+  else if (step.cardPos==='left') { card.style.right='auto'; card.style.left='2%'; card.style.top=_cardTop; card.style.transform='none'; }
+  else { card.style.left='50%'; card.style.right='auto'; card.style.top=_cardTop; card.style.transform='translateX(-50%)'; }
 }
 
 // ── SVG Animations ───────────────────────────────────────────────
