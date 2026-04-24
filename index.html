@@ -1503,7 +1503,24 @@ function startDemo() {
   const overlay = document.getElementById('demo-overlay');
   overlay.style.display = 'block';
   overlay.style.pointerEvents = 'all';
-  if (window.innerWidth <= 640) { overlay.classList.add('mob-demo'); const _mc=document.getElementById('demo-card'); _mc.style.zIndex='9999'; document.body.appendChild(_mc); }
+  if (window.innerWidth <= 640) {
+    overlay.classList.add('mob-demo');
+    const _bd = document.createElement('div');
+    _bd.id = 'mob-demo-backdrop';
+    _bd.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:9998;';
+    document.body.appendChild(_bd);
+    const _mc = document.getElementById('demo-card');
+    _mc.style.setProperty('position','fixed','important');
+    _mc.style.setProperty('bottom','80px','important');
+    _mc.style.setProperty('top','auto','important');
+    _mc.style.setProperty('left','12px','important');
+    _mc.style.setProperty('right','12px','important');
+    _mc.style.setProperty('width','auto','important');
+    _mc.style.setProperty('max-width','none','important');
+    _mc.style.setProperty('transform','none','important');
+    _mc.style.zIndex = '9999';
+    document.body.appendChild(_mc);
+  }
   document.getElementById('demo-zone').scrollIntoView({behavior:'smooth', block:'center'});
   demoStep_cur = 0;
   buildDemoDots();
@@ -1515,7 +1532,12 @@ function stopDemo() {
   clearTimeout(demoTimer); clearInterval(demoProgressInterval);
   const _ov = document.getElementById('demo-overlay');
   const _dc = document.getElementById('demo-card');
-  if (!_ov.contains(_dc)) { _dc.style.zIndex='10'; _ov.appendChild(_dc); }
+  document.getElementById('mob-demo-backdrop')?.remove();
+  if (!_ov.contains(_dc)) {
+    ['position','bottom','top','left','right','width','max-width','transform'].forEach(p=>_dc.style.removeProperty(p));
+    _dc.style.zIndex = '10';
+    _ov.appendChild(_dc);
+  }
   _ov.style.display = 'none';
   _ov.classList.remove('mob-demo');
   document.getElementById('demo-trigger-bar').style.display = 'flex';
