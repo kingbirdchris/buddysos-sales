@@ -1504,11 +1504,10 @@ function startDemo() {
   overlay.style.display = 'block';
   overlay.style.pointerEvents = 'all';
   if (window.innerWidth <= 640) {
-    overlay.classList.add('mob-demo');
-    const _bd = document.createElement('div');
-    _bd.id = 'mob-demo-backdrop';
-    _bd.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:9998;';
-    document.body.appendChild(_bd);
+    // Show the dashboard SVG so the spotlight has something to illuminate
+    document.getElementById('demo-zone').style.setProperty('display','block','important');
+    document.querySelector('.dash-svg-wrap').style.setProperty('display','block','important');
+    // Fix card at viewport bottom — above spotlight shadow (z:9999 vs spotlight z:5)
     const _mc = document.getElementById('demo-card');
     _mc.style.setProperty('position','fixed','important');
     _mc.style.setProperty('bottom','80px','important');
