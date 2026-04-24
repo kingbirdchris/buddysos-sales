@@ -1105,8 +1105,6 @@ body.viewer-mode #tab-overview { display: block !important; }
         <button class="suc-btn library" onclick="goToLibrary()">View Library</button>
       </div>
       <div class="save-confirm">Saved to your Proposals library.</div>
-      <div style="margin-top:14px;background:rgba(16,185,129,0.07);border:1px solid rgba(16,185,129,0.2);border-radius:10px;padding:12px 14px;">
-        <div style="font-size:10px;font-weight:700;color:#6ee7b7;letter-spacing:0.8px;text-transform:uppercase;margin-bottom:5px;">&#128242; Get notified when they open it</div>
         <div style="font-size:11px;color:#94a3b8;line-height:1.5;">1. Download the <strong style="color:#cbd5e1;">ntfy</strong> app (iOS/Android &#8212; free)<br>2. Subscribe to topic: <code id="ntfy-topic" style="background:rgba(255,255,255,0.08);padding:2px 7px;border-radius:4px;color:#c4b5fd;font-size:11px;"></code></div>
       </div>
     </div>
@@ -1237,15 +1235,20 @@ function generateProposal() {
   // ── Save to Drive + notify Slack (skips internal @kingbirdsolutions.com) ──
   const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbzvPgJfSsCdP5bktvGKOIew9S80VGtp-oXrCIkveyjpFp2fGONfN4-QbHuQH316IKsYHQ/exec';
   if (WEBHOOK_URL && WEBHOOK_URL !== 'https://script.google.com/macros/s/AKfycbzvPgJfSsCdP5bktvGKOIew9S80VGtp-oXrCIkveyjpFp2fGONfN4-QbHuQH316IKsYHQ/exec') {
-    // Use text/plain — safe CORS type, no preflight, Apps Script receives it as doPost
-    fetch(WEBHOOK_URL, {
-      method: 'POST',
-      headers: {'Content-Type': 'text/plain;charset=utf-8'},
-      body: JSON.stringify({...data, encoded})
-    }).catch(()=>{}); // fire and forget
+    // GET with URL params — the only reliable browser→Apps Script method
+    // (Apps Script 302-redirects POST to GET, losing the body)
+    const _wPayload = {
+      id: data.id, contactName: data.contactName, contactEmail: data.contactEmail,
+      eventName: data.eventName, eventType: data.eventType,
+      attendance: data.attendance, website: data.website,
+      contextLine: data.contextLine, internal: data.internal,
+      shareLink: 'https://sales.buddysos.app/#' + encoded
+    };
+    const _wUrl = WEBHOOK_URL + '?data=' + encodeURIComponent(JSON.stringify(_wPayload));
+    fetch(_wUrl, {mode: 'no-cors'}).catch(()=>{}); // fire and forget
   }
   document.getElementById('success-panel').style.display = 'block';
-  document.getElementById('ntfy-topic').textContent = 'bsos-'+data.id;
+  
   proposalCompleted = true;
   currentProposalData = data;
   const sc2 = document.getElementById('sc-2');
