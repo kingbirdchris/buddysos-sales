@@ -565,11 +565,6 @@ body.viewer-mode #tab-overview { display: block !important; }
     <div class="step-circle" id="sc-2">2</div>
     <div class="step-label">Generate</div>
   </div>
-  <div class="step-sep"></div>
-  <div class="step-tab" onclick="showTab(3)" data-tab="3">
-    <div class="step-circle" id="sc-3">3</div>
-    <div class="step-label">Proposals</div>
-  </div>
 </nav>
 
 <!-- TAB 1 — OVERVIEW -->
@@ -1103,32 +1098,13 @@ body.viewer-mode #tab-overview { display: block !important; }
       <div class="success-actions">
         <button class="suc-btn view" onclick="viewGeneratedProposal()">View Proposal</button>
         <button class="suc-btn pdf" onclick="printProposal()">Download PDF</button>
-        <button class="suc-btn library" onclick="goToLibrary()">View Library</button>
       </div>
-      <div class="save-confirm">Saved to your Proposals library.</div>
-        <div style="font-size:11px;color:#94a3b8;line-height:1.5;">1. Download the <strong style="color:#cbd5e1;">ntfy</strong> app (iOS/Android &#8212; free)<br>2. Subscribe to topic: <code id="ntfy-topic" style="background:rgba(255,255,255,0.08);padding:2px 7px;border-radius:4px;color:#c4b5fd;font-size:11px;"></code></div>
+      <div class="save-confirm">Proposal saved to Drive.</div>
       </div>
     </div>
   </div>
 </div><!-- /tab-generate -->
 
-
-<!-- TAB 3 — PROPOSALS LIBRARY -->
-<div id="tab-proposals" class="tab-panel">
-  <div class="lib-inner">
-    <div class="lib-header">
-      <h2>Your <span>Proposals</span></h2>
-      <button class="clear-archived-btn" id="clear-archived-btn" onclick="clearArchived()">Clear Archived</button>
-    </div>
-    <div class="proposals-grid" id="proposals-grid"></div>
-    <div class="empty-state" id="empty-state">
-      <div class="empty-icon">&#128196;</div>
-      <h3>No proposals yet.</h3>
-      <p>Generate your first one to get a shareable, personalized one-pager.</p>
-      <button onclick="showTab(2)">Generate First Proposal &#8594;</button>
-    </div>
-  </div>
-</div><!-- /tab-proposals -->
 
 
 <!-- CALENDAR MODAL -->
@@ -1308,12 +1284,6 @@ function applyPersonalization(data) {
   if (fi) fi.textContent = ' · Proposal for '+data.eventName+' · '+new Date(data.date).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
   currentProposalData = data;
   if (data.attendance) showRiskStats(data.attendance, data.eventName);
-  try {
-    fetch('https://ntfy.sh/bsos-'+data.id, {method:'POST',
-      body:'\uD83D\uDC41\uFE0F '+(data.contactName||'Someone')+' opened your BuddySOS proposal for '+(data.eventName||'your event'),
-      headers:{'Title':'BuddySOS Proposal Viewed','Priority':'high','Tags':'eyes'}
-    }).catch(()=>{});
-  } catch(e){}
 }
 
 // ── Risk Stats ───────────────────────────────────────────────────
@@ -1761,4 +1731,4 @@ function getContextTemplate(eventName, eventType, location, attendance) {
 }
 </script>
 </body>
-</html>                                             
+</html>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
