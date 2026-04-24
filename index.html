@@ -1494,7 +1494,7 @@ function startDemo() {
   const overlay = document.getElementById('demo-overlay');
   overlay.style.display = 'block';
   overlay.style.pointerEvents = 'all';
-  if (window.innerWidth <= 640) overlay.classList.add('mob-demo');
+  if (window.innerWidth <= 640) { overlay.classList.add('mob-demo'); document.body.appendChild(document.getElementById('demo-card')); }
   document.getElementById('demo-zone').scrollIntoView({behavior:'smooth', block:'center'});
   demoStep_cur = 0;
   buildDemoDots();
@@ -1505,6 +1505,8 @@ function stopDemo() {
   demoActive = false; demoPaused = false;
   clearTimeout(demoTimer); clearInterval(demoProgressInterval);
   const _ov = document.getElementById('demo-overlay');
+  const _dc = document.getElementById('demo-card');
+  if (!_ov.contains(_dc)) _ov.appendChild(_dc);
   _ov.style.display = 'none';
   _ov.classList.remove('mob-demo');
   document.getElementById('demo-trigger-bar').style.display = 'flex';
