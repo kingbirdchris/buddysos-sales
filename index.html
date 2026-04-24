@@ -495,6 +495,56 @@ body.viewer-mode #tab-overview { display: block !important; }
   .dashboard-hero, .flow, .bottom, .cta, .attendee-strip,
   .stakes-grid, #risk-section { page-break-inside: avoid !important; break-inside: avoid !important; }
 }
+
+/* ─── Compact What's at Stake Table ─── */
+.stakes-table {
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.stakes-tr { display: grid; grid-template-columns: 140px 1fr 1fr; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.stakes-tr:last-child { border-bottom: none; }
+.stakes-thead { background: rgba(255,255,255,0.03); }
+.stakes-th { padding: 10px 14px; font-size: 10px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; }
+.stakes-th-bad { color: #fca5a5; border-left: 1px solid rgba(255,255,255,0.06); }
+.stakes-th-good { color: #6ee7b7; border-left: 1px solid rgba(255,255,255,0.06); }
+.stakes-th-scenario { }
+.stakes-scenario { padding: 12px 14px; font-size: 11px; font-weight: 700; color: #94a3b8; display: flex; align-items: center; }
+.stakes-td { padding: 12px 14px; font-size: 11px; line-height: 1.5; border-left: 1px solid rgba(255,255,255,0.06); }
+.stakes-bad { color: #cbd5e1; background: rgba(239,68,68,0.04); }
+.stakes-good { color: #cbd5e1; background: rgba(16,185,129,0.04); }
+
+/* ─── Mobile dashboard: hide SVG, show feature list ─── */
+.dash-mobile-features { display: none; }
+@media (max-width: 640px) {
+  /* Stakes table: stack to 1 col */
+  .stakes-tr { grid-template-columns: 1fr; }
+  .stakes-scenario { border-bottom: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.03); font-size: 10.5px; padding: 8px 12px; }
+  .stakes-td { border-left: none; border-top: 1px solid rgba(255,255,255,0.04); padding: 10px 12px; }
+  .stakes-thead { display: none; }
+  .stakes-bad::before { content: "Without BuddySOS  "; font-size: 9px; font-weight: 700; text-transform: uppercase; color: #fca5a5; display: block; margin-bottom: 4px; letter-spacing: 0.5px; }
+  .stakes-good::before { content: "With BuddySOS  "; font-size: 9px; font-weight: 700; text-transform: uppercase; color: #6ee7b7; display: block; margin-bottom: 4px; letter-spacing: 0.5px; }
+
+  /* Hide SVG dashboard on mobile, show feature list */
+  .dash-svg-wrap { display: none !important; }
+  .analytics-strip { display: none !important; }
+  .dash-mobile-features { display: flex; flex-direction: column; gap: 10px; padding: 14px 16px; }
+  .dmf-item { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: #cbd5e1; line-height: 1.5; }
+  .dmf-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+  .dmf-dot.active { background: #ef4444; }
+  .dmf-dot.progress { background: #f59e0b; }
+  .dmf-dot.normal { background: #8B5CF6; }
+
+  /* Hide demo on mobile */
+  #demo-zone, #demo-trigger-bar { display: none !important; }
+
+  /* Tighten header/nav on mobile */
+  body { padding-top: 48px !important; }
+  #step-nav { height: 48px !important; }
+}
+
 </style>
 </head>
 <body>
@@ -546,7 +596,7 @@ body.viewer-mode #tab-overview { display: block !important; }
     <!-- HERO -->
     <div class="hero">
       <h1>Every attendee has a panic button.<br><span class="g" id="hero-line2">Your dispatcher gets the coordinates.</span></h1>
-      <p>BuddySOS is a free group safety app for attendees and a real-time incident monitoring platform for your team. An attendee taps SOS. Your staff dashboard receives the alert with GPS location, giving your dispatcher the precise coordinates to direct your response team.</p>
+      <p>BuddySOS is a free app for every attendee and a real-time command dashboard for your staff. An attendee taps SOS — your dispatcher gets exact GPS coordinates in seconds.</p>
     </div>
 
     <!-- PILLS -->
@@ -555,20 +605,6 @@ body.viewer-mode #tab-overview { display: block !important; }
       <div class="pill"><span class="dot"></span>iOS &amp; Android</div>
     </div>
 
-    <!-- WHAT'S AT STAKE -->
-    <div class="stakes-section">
-      <div class="sec-label" style="margin-bottom:12px;">What's at stake</div>
-      <div class="stakes-grid">
-        <div class="stakes-card"><div class="stakes-inner without"><span class="stakes-badge without-badge">Without BuddySOS</span><p>Radio call: "Anyone near Gate A?" No GPS. No log. No accountability. Family files lawsuit 3 weeks later — no documentation exists.</p></div></div>
-        <div class="stakes-card"><div class="stakes-inner without"><span class="stakes-badge without-badge">Without BuddySOS</span><p>Medical incident reported verbally. Staff dispatched by estimation. Ambulance arrives 9 minutes late because no one had coordinates.</p></div></div>
-        <div class="stakes-card"><div class="stakes-inner without"><span class="stakes-badge without-badge">Without BuddySOS</span><p>Post-event: insurer asks for incident documentation. You have handwritten notes and memory. Claim disputed.</p></div></div>
-      </div>
-      <div class="stakes-grid">
-        <div class="stakes-card"><div class="stakes-inner with"><span class="stakes-badge with-badge">With BuddySOS</span><p>SOS fires. GPS hits the dashboard in 2 seconds. Responder assigned. Resolved in 4 minutes. Full audit trail saved automatically.</p></div></div>
-        <div class="stakes-card"><div class="stakes-inner with"><span class="stakes-badge with-badge">With BuddySOS</span><p>Medical alert received with exact location. Dispatcher radios nearest responder with coordinates. Closed in 3m 12s.</p></div></div>
-        <div class="stakes-card"><div class="stakes-inner with"><span class="stakes-badge with-badge">With BuddySOS</span><p>Every incident timestamped, GPS-tagged, assigned, and logged. Export PDF to your insurer in one click. Claim supported.</p></div></div>
-      </div>
-    </div>
 
     <!-- FULL-WIDTH STAFF DASHBOARD -->
     <div class="dashboard-hero">
@@ -857,6 +893,39 @@ body.viewer-mode #tab-overview { display: block !important; }
       </div>
     </div>
 
+    
+
+    <!-- WHAT'S AT STAKE — compact comparison table -->
+    <div class="stakes-compact" style="margin-bottom:18px;">
+      <div class="sec-label" style="margin-bottom:12px;">What's at stake</div>
+      <div class="stakes-table">
+        <!-- Header -->
+        <div class="stakes-tr stakes-thead">
+          <div class="stakes-th-scenario"></div>
+          <div class="stakes-th stakes-th-bad">Without BuddySOS</div>
+          <div class="stakes-th stakes-th-good">With BuddySOS</div>
+        </div>
+        <!-- Row 1 -->
+        <div class="stakes-tr">
+          <div class="stakes-scenario">Incident Response</div>
+          <div class="stakes-td stakes-bad">Radio call: no GPS, no log, no accountability. Family files lawsuit — no documentation exists.</div>
+          <div class="stakes-td stakes-good">GPS hits dashboard in 2 seconds. Responder assigned. Resolved in 4 minutes. Full audit trail saved.</div>
+        </div>
+        <!-- Row 2 -->
+        <div class="stakes-tr">
+          <div class="stakes-scenario">Medical Emergency</div>
+          <div class="stakes-td stakes-bad">Staff dispatched by estimation. Ambulance arrives 9 minutes late — no one had coordinates.</div>
+          <div class="stakes-td stakes-good">Exact location sent instantly. Dispatcher directs nearest responder. Closed in 3m 12s.</div>
+        </div>
+        <!-- Row 3 -->
+        <div class="stakes-tr">
+          <div class="stakes-scenario">Post-Event Liability</div>
+          <div class="stakes-td stakes-bad">Handwritten notes and memory. Insurer asks for documentation. Claim disputed.</div>
+          <div class="stakes-td stakes-good">Every incident timestamped, GPS-tagged, logged. Export PDF in one click. Claim supported.</div>
+        </div>
+      </div>
+    </div>
+
     <!-- HOW IT CONNECTS -->
     <div class="flow-section">
       <div class="sec-label">How It Connects</div>
@@ -880,16 +949,6 @@ body.viewer-mode #tab-overview { display: block !important; }
         </div>
       </div>
     </div>
-
-    <!-- AUDIENCE -->
-    <div class="audience">
-      <span class="aud">&#127914; Festival Producers</span>
-      <span class="aud">&#127967;&#65039; Venue Operators</span>
-      <span class="aud">&#128272; Security Companies</span>
-      <span class="aud">&#128203; Insurance &amp; Risk Teams</span>
-      <span class="aud">&#127891; University Events</span>
-    </div>
-
     <!-- BOTTOM BOXES -->
     <div class="bottom">
       <div class="b-box slate">
