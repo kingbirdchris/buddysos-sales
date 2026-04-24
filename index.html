@@ -1494,7 +1494,7 @@ function startDemo() {
   const overlay = document.getElementById('demo-overlay');
   overlay.style.display = 'block';
   overlay.style.pointerEvents = 'all';
-  if (window.innerWidth <= 640) { overlay.classList.add('mob-demo'); document.body.appendChild(document.getElementById('demo-card')); }
+  if (window.innerWidth <= 640) { overlay.classList.add('mob-demo'); const _mc=document.getElementById('demo-card'); _mc.style.zIndex='9999'; document.body.appendChild(_mc); }
   document.getElementById('demo-zone').scrollIntoView({behavior:'smooth', block:'center'});
   demoStep_cur = 0;
   buildDemoDots();
@@ -1506,7 +1506,7 @@ function stopDemo() {
   clearTimeout(demoTimer); clearInterval(demoProgressInterval);
   const _ov = document.getElementById('demo-overlay');
   const _dc = document.getElementById('demo-card');
-  if (!_ov.contains(_dc)) _ov.appendChild(_dc);
+  if (!_ov.contains(_dc)) { _dc.style.zIndex='10'; _ov.appendChild(_dc); }
   _ov.style.display = 'none';
   _ov.classList.remove('mob-demo');
   document.getElementById('demo-trigger-bar').style.display = 'flex';
