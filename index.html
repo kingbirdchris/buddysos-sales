@@ -1602,7 +1602,7 @@ function positionDemoElements(step) {
   const spotlight = document.getElementById('demo-spotlight');
   const card = document.getElementById('demo-card');
   /* Mobile: spotlight hidden via CSS, card fixed via CSS — just neutralise backdrop */
-  if (window.innerWidth <= 640) { backdrop.style.background = 'transparent'; return; }
+  if (window.innerWidth <= 640) { spotlight.style.display = 'none'; backdrop.style.background = 'transparent'; return; }
   /* backdrop must stay transparent — spotlight box-shadow handles all the darkness */
   backdrop.style.background = 'rgba(11,14,19,0)';
   if (step.spotlight) {
