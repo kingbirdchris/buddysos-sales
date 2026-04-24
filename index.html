@@ -562,8 +562,11 @@ body.viewer-mode #tab-overview { display: block !important; }
   .dmf-dot.progress { background: #f59e0b; }
   .dmf-dot.normal { background: #8B5CF6; }
 
-  /* Hide demo on mobile */
-  #demo-zone, #demo-trigger-bar { display: none !important; }
+  /* Hide demo zone SVG on mobile, but keep trigger bar visible */
+  #demo-zone { display: none !important; }
+  #demo-trigger-bar { display: flex !important; padding: 16px 14px 14px; flex-direction: column; align-items: flex-start; gap: 10px; }
+  #demo-trigger-bar span { font-size: 11px; }
+  #demo-start-btn { width: 100%; justify-content: center; padding: 12px 18px !important; font-size: 13px !important; }
 
   /* Tighten header/nav on mobile */
   body { padding-top: 48px !important; }
@@ -639,6 +642,12 @@ body.viewer-mode #tab-overview { display: block !important; }
       </div>
       <div class="dh-body">
 
+        <div class="dash-mobile-features">
+          <div class="dmf-item"><div class="dmf-dot active"></div><span><strong style="color:#f8fafc;">One-tap SOS</strong> — GPS hits your dispatcher in under 2 seconds. No radio, no estimation.</span></div>
+          <div class="dmf-item"><div class="dmf-dot progress"></div><span><strong style="color:#f8fafc;">Responder assigned in one click</strong> — status updates across your whole team instantly.</span></div>
+          <div class="dmf-item"><div class="dmf-dot normal"></div><span><strong style="color:#f8fafc;">Live venue heatmap</strong> — crowd concentration visible across all zones in real time.</span></div>
+          <div class="dmf-item"><div class="dmf-dot normal"></div><span><strong style="color:#f8fafc;">Full audit trail</strong> — every incident timestamped, GPS-tagged, exportable for your insurer.</span></div>
+        </div>
         <div id="demo-zone" style="position:relative;">
           <div class="dash-svg-wrap">
           <svg viewBox="0 0 482 346" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
