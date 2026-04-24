@@ -320,6 +320,7 @@ body { padding-top: 52px; }
 .demo-dot { display:inline-block; transition: all 0.3s ease; cursor:pointer; }
 #demo-zone { position: relative; }
 #demo-overlay { border-radius: 9px; overflow: hidden; }
+.dash-svg-wrap { border-radius: 9px; overflow: hidden; max-width: 520px; margin: 0 auto; }
 
 /* ─── Tab 2 — Generator ─── */
 .gen-inner { max-width: 800px; margin: 0 auto; padding: 40px 32px; }
@@ -1234,7 +1235,7 @@ function generateProposal() {
 
   // ── Save to Drive + notify Slack (skips internal @kingbirdsolutions.com) ──
   const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbzvPgJfSsCdP5bktvGKOIew9S80VGtp-oXrCIkveyjpFp2fGONfN4-QbHuQH316IKsYHQ/exec';
-  if (WEBHOOK_URL && WEBHOOK_URL !== 'https://script.google.com/macros/s/AKfycbzvPgJfSsCdP5bktvGKOIew9S80VGtp-oXrCIkveyjpFp2fGONfN4-QbHuQH316IKsYHQ/exec') {
+  if (WEBHOOK_URL) {
     // GET with URL params — the only reliable browser→Apps Script method
     // (Apps Script 302-redirects POST to GET, losing the body)
     const _wPayload = {
@@ -1760,4 +1761,4 @@ function getContextTemplate(eventName, eventType, location, attendance) {
 }
 </script>
 </body>
-</html>
+</html>                                             
