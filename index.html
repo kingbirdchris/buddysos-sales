@@ -1460,7 +1460,7 @@ const DEMO_STEPS = [
     body:'Medical emergency near Main Stage. Alert hits your dashboard in under 2 seconds with exact GPS. No ambiguity. No delay.',
     contrast:'"Anyone near Gate A? Over\u2026 come back? \u2026Radio silence."',
     contrastLabel:'Radio-only alternative',
-    spotlight:{l:'14.5%',t:'6%',w:'31%',h:'60%'}, cardPos:'right', action:'sos-fire' },
+    spotlight:{l:'14.5%',t:'14%',w:'33%',h:'72%'}, cardPos:'right', action:'sos-fire' },
   { label:'STEP 3 OF 5', title:'Dispatcher has exact coordinates',
     body:'The venue map shows the precise location. No guessing. Your dispatcher directs the team straight to the incident — in seconds.',
     contrast:null, spotlight:{l:'45%',t:'6%',w:'55%',h:'75%'}, cardPos:'left', action:'show-gps' },
@@ -1596,8 +1596,8 @@ function positionDemoElements(step) {
   if (step.spotlight) {
     const sp = step.spotlight;
     spotlight.style.left=sp.l; spotlight.style.top=sp.t; spotlight.style.width=sp.w; spotlight.style.height=sp.h;
-    spotlight.style.background='transparent';
-    spotlight.style.boxShadow='0 0 0 9999px rgba(0,0,0,0.93), 0 0 0 2px rgba(139,92,246,1), 0 0 0 6px rgba(139,92,246,0.35), 0 0 32px 6px rgba(139,92,246,0.5)';
+    spotlight.style.background='rgba(255,255,255,0.06)';
+    spotlight.style.boxShadow='0 0 0 9999px rgba(0,0,0,0.94), 0 0 0 2px rgba(139,92,246,1), 0 0 0 6px rgba(139,92,246,0.4), 0 0 36px 8px rgba(139,92,246,0.55)';
     spotlight.style.display='block';
   } else { spotlight.style.display='none'; }
   card.style.transition='all 0.4s ease';
@@ -1751,5 +1751,4 @@ function getContextTemplate(eventName, eventType, location, attendance) {
   return map[eventType] || map[''];
 }
 </script>
-</body>
-</html>  
+</bod
